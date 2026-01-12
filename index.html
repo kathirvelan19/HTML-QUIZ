@@ -2,25 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HTML QUIZ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Mastery Quiz</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Boldonse&family=Bungee+Tint&family=Cal+Sans&family=Liter&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display+SC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-   
+
   <div class="quiz-container">
-    <h2 id="question">Loading...</h2>
-    
-    <div id="options">
-      <!-- Options will be inserted here -->
+    <div class="quiz-header">
+      <h1>HTML Mastery Challenge</h1>
+      <p class="progress-text">Question <span id="current-question-num">1</span> of <span id="total-questions">X</span></p>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
     </div>
-    <button onclick="submitAnswer()">Submit</button>
-    <p id="score"></p>
+
+    <div class="quiz-body">
+      <h2 id="question" class="question-text">Loading question...</h2>
+
+      <div id="options" class="options-grid">
+        <!-- Options will be inserted here -->
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <button id="submit-btn" onclick="submitAnswer()">Submit Answer</button>
+      <div id="feedback" class="feedback-message"></div>
+      <p id="score" class="score-display"></p>
+      <button id="restart-btn" onclick="restartQuiz()" style="display: none;">Restart Quiz</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-
 </html>
