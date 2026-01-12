@@ -5,8 +5,8 @@
   --secondary-color: #ffc107; /* A contrasting yellow for accents */
   --text-color-dark: #333; /* Dark text for readability */
   --text-color-light: #f8f8f8; /* Light text on dark backgrounds */
-  --background-gradient-start: #e0f2f7; /* Light blue */
-  --background-gradient-end: #c5e1a5; /* Light green */
+   --background-gradient-start: #121212; /* Darkest black */
+  --background-gradient-end: #2c0b3b; 
   --card-background: #ffffff; /* White background for quiz container */
   --border-radius-lg: 12px;
   --border-radius-md: 8px;
@@ -229,3 +229,4 @@ body {
   20%, 60% { transform: translateX(-5px); }
   40%, 80% { transform: translateX(5px); }
 }
+
