@@ -1,20 +1,39 @@
 /* --- Root Variables for Theming --- */
 :root {
-  --primary-color: #3f51b5; /* A vibrant blue for main elements */
-  --primary-dark: #2c387e; /* Darker shade for hover/active */
-  --secondary-color: #ffc107; /* A contrasting yellow for accents */
-  --text-color-dark: #333; /* Dark text for readability */
-  --text-color-light: #f8f8f8; /* Light text on dark backgrounds */
-   --background-gradient-start: #121212; /* Darkest black */
-  --background-gradient-end: #2c0b3b; 
-  --card-background: #ffffff; /* White background for quiz container */
+  /* Primary color palette for dark theme (Violet / Purple dominant) */
+  --primary-color: #BB86FC; /* A vibrant, eye-catching violet for interactive elements, highlights */
+  --primary-dark: #3700B3; /* Darker shade of violet for hover/active states, stronger accents */
+  --secondary-color: #03DAC6; /* A bright teal/aqua for contrasting accents, progress bars, correct answers */
+
+  /* Background and Surface Colors */
+  --background-gradient-start: #121212; /* Deep, almost pure black */
+  --background-gradient-end: #2C0B3B;   /* Dark, desaturated violet/purple */
+  --card-background: #1E1E1E; /* A slightly lighter dark grey for the quiz container, providing subtle depth */
+  --surface-color: #2D2D2D;   /* General surface color for less prominent elements */
+
+  /* Text Colors */
+  --text-color-primary: #E0E0E0; /* Light grey for main text, readable on dark backgrounds */
+  --text-color-secondary: #A0A0A0; /* Muted grey for secondary information, sub-headings */
+  --text-color-on-primary: #121212; /* Dark text for elements with primary-color background */
+
+  /* Border and Shadow Effects */
+  --border-color-dark: #3A3A3A; /* Subtle dark border for separation */
+  --border-color-light: #505050; /* Slightly lighter border for contrast */
+  --box-shadow-dark: 0 12px 40px rgba(0, 0, 0, 0.5); /* Pronounced shadow for depth on dark background */
+  --glow-shadow-violet: 0 0 15px rgba(187, 134, 252, 0.6); /* Violet glow effect */
+  --glow-shadow-teal: 0 0 10px rgba(3, 218, 198, 0.4);   /* Teal glow effect */
+
+
+  /* State Colors (Feedback) */
+  --correct-color: #03DAC6; /* Teal for correct answers */
+  --incorrect-color: #CF6679; /* Soft red/pink for incorrect answers */
+  --disabled-color: #4A4A4A; /* Dark grey for disabled states */
+
+  /* Component Specifics */
   --border-radius-lg: 12px;
   --border-radius-md: 8px;
-  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  --option-hover-bg: #e0e0e0;
-  --correct-color: #4CAF50; /* Green for correct answers */
-  --incorrect-color: #f44336; /* Red for incorrect answers */
-  --progress-bg: #e0e0e0;
+  --option-hover-bg: #333333; /* Darker grey for option hover */
+  --progress-bg: #3A3A3A; /* Dark grey for empty part of progress bar */
 }
 
 /* --- Global Styles --- */
@@ -30,10 +49,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Use min-height to allow content to grow */
-  color: var(--text-color-dark);
+  min-height: 100vh;
+  color: var(--text-color-primary); /* Use primary text color for readability */
   line-height: 1.6;
-  padding: 20px; /* Add some padding for small screens */
+  padding: 20px;
+  /* Add a subtle overall glow for the body */
+  box-shadow: inset 0 0 100px rgba(187, 134, 252, 0.05);
 }
 
 /* --- Quiz Container --- */
@@ -41,13 +62,16 @@ body {
   background: var(--card-background);
   padding: 40px;
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-dark); /* Enhanced shadow for depth */
+  border: 1px solid var(--border-color-dark); /* Subtle border for definition */
   width: 100%;
-  max-width: 600px; /* Max width for desktop */
+  max-width: 600px;
   text-align: center;
-  display: flex; /* Use flexbox for vertical layout */
+  display: flex;
   flex-direction: column;
-  gap: 25px; /* Spacing between sections */
+  gap: 25px;
+  /* Add a subtle glow to the container itself */
+  animation: subtleGlow 2s infinite alternate ease-in-out;
 }
 
 /* --- Quiz Header --- */
@@ -58,94 +82,102 @@ body {
 .quiz-header h1 {
   font-family: 'Playfair Display SC', serif;
   font-weight: 700;
-  font-size: 2.5em; /* Larger heading */
-  color: var(--primary-color);
+  font-size: 2.8em; /* Slightly larger heading for impact */
+  color: var(--primary-color); /* Vibrant violet for the title */
   margin-bottom: 15px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+  text-shadow: 0 0 15px rgba(187, 134, 252, 0.8); /* Stronger violet glow for title */
+  letter-spacing: 1px;
 }
 
 .progress-text {
   font-size: 1.1em;
   margin-bottom: 10px;
-  color: #666;
+  color: var(--text-color-secondary); /* Muted grey for progress text */
 }
 
 .progress-bar {
   background: var(--progress-bg);
   height: 8px;
   border-radius: 4px;
-  overflow: hidden; /* Ensures fill stays within bounds */
+  overflow: hidden;
   margin-bottom: 20px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
 }
 
 .progress-fill {
   height: 100%;
-  width: 0%; /* Will be controlled by JS */
-  background-color: var(--secondary-color);
+  width: 0%;
+  background-color: var(--secondary-color); /* Teal for progress fill */
   border-radius: 4px;
-  transition: width 0.3s ease-in-out; /* Smooth transition for progress bar */
+  transition: width 0.3s ease-in-out;
+  box-shadow: var(--glow-shadow-teal); /* Teal glow for the progress fill */
 }
 
 /* --- Quiz Body --- */
 .quiz-body {
-  flex-grow: 1; /* Allows body to take available space */
+  flex-grow: 1;
 }
 
 .question-text {
   font-family: 'Playfair Display SC', serif;
   font-weight: 400;
-  font-size: 1.6em;
+  font-size: 1.8em; /* Larger question text */
   margin-bottom: 30px;
-  color: var(--text-color-dark);
+  color: var(--text-color-primary); /* Light text for questions */
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1); /* Subtle text glow */
 }
 
 .options-grid {
   display: grid;
-  grid-template-columns: 1fr; /* Single column for options by default */
-  gap: 15px; /* Spacing between options */
+  grid-template-columns: 1fr;
+  gap: 15px;
 }
 
 .options-grid button {
   width: 100%;
   padding: 15px 20px;
   font-size: 1.1em;
-  background-color: var(--card-background);
-  color: var(--text-color-dark);
-  border: 2px solid var(--primary-color);
+  background-color: var(--surface-color); /* Darker surface for buttons */
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color-light); /* Lighter border for buttons */
   border-radius: var(--border-radius-md);
   cursor: pointer;
-  transition: all 0.2s ease-in-out; /* Smooth transitions */
-  text-align: left; /* Align text left for better readability */
-  outline: none; /* Remove default outline */
+  transition: all 0.2s ease-in-out;
+  text-align: left;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for buttons */
 }
 
 .options-grid button:hover:not(.selected):not(.correct):not(.incorrect) {
   background-color: var(--option-hover-bg);
-  transform: translateY(-2px); /* Slight lift effect */
-  border-color: var(--primary-dark);
+  transform: translateY(-3px) scale(1.01); /* More pronounced lift and slight scale */
+  border-color: var(--primary-color); /* Violet border on hover */
+  box-shadow: var(--glow-shadow-violet); /* Violet glow on hover */
 }
 
 /* Selected option style */
 .options-grid button.selected {
   background-color: var(--primary-color);
-  color: var(--text-color-light);
+  color: var(--text-color-on-primary); /* Dark text on vibrant background */
   border-color: var(--primary-dark);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--glow-shadow-violet), 0 4px 15px rgba(0, 0, 0, 0.3); /* Stronger glow + shadow */
 }
 
 /* Correct/Incorrect feedback for options */
 .options-grid button.correct {
-  background-color: var(--correct-color);
-  color: var(--text-color-light);
+  background-color: var(--correct-color); /* Teal for correct */
+  color: var(--text-color-on-primary);
   border-color: var(--correct-color);
   animation: pulse 0.5s ease-out;
+  box-shadow: var(--glow-shadow-teal), 0 4px 15px rgba(0, 0, 0, 0.3); /* Teal glow for correct */
 }
 
 .options-grid button.incorrect {
-  background-color: var(--incorrect-color);
-  color: var(--text-color-light);
+  background-color: var(--incorrect-color); /* Pink-red for incorrect */
+  color: var(--text-color-primary); /* Still light text, but on pinkish background */
   border-color: var(--incorrect-color);
   animation: shake 0.5s ease-out;
+  box-shadow: 0 0 10px rgba(207, 102, 121, 0.6), 0 4px 15px rgba(0, 0, 0, 0.3); /* Reddish glow for incorrect */
 }
 
 /* --- Quiz Footer --- */
@@ -154,40 +186,43 @@ body {
 }
 
 #submit-btn, #restart-btn {
-  padding: 15px 30px;
-  font-size: 1.2em;
-  font-weight: 600;
+  padding: 15px 35px; /* Larger buttons */
+  font-size: 1.3em; /* Larger font */
+  font-weight: 700; /* Bolder font */
   background-color: var(--primary-color);
-  color: var(--text-color-light);
+  color: var(--text-color-on-primary);
   border: none;
   border-radius: var(--border-radius-md);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   margin-top: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--glow-shadow-violet), 0 8px 25px rgba(0, 0, 0, 0.4); /* Strong violet glow + shadow */
 }
 
 #submit-btn:hover, #restart-btn:hover {
   background-color: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px) scale(1.02); /* More lift and scale on hover */
+  box-shadow: var(--glow-shadow-violet), 0 10px 30px rgba(0, 0, 0, 0.6); /* Even stronger glow + shadow */
 }
 
 #submit-btn:disabled {
-    background-color: #cccccc;
+    background-color: var(--disabled-color); /* Dark grey for disabled */
+    color: var(--text-color-secondary);
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    border: 1px dashed var(--border-color-dark); /* Dashed border for disabled */
 }
 
 .feedback-message {
-  font-size: 1.1em;
+  font-size: 1.2em; /* Slightly larger feedback */
   margin-top: 15px;
   font-weight: 600;
-  min-height: 25px; /* Reserve space for message */
+  min-height: 25px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2); /* Subtle glow for feedback text */
 }
 
 .feedback-message.show {
@@ -197,36 +232,43 @@ body {
 
 .feedback-message.correct-feedback {
   color: var(--correct-color);
+  text-shadow: 0 0 10px rgba(3, 218, 198, 0.8); /* Teal glow */
 }
 
 .feedback-message.incorrect-feedback {
   color: var(--incorrect-color);
+  text-shadow: 0 0 10px rgba(207, 102, 121, 0.8); /* Reddish glow */
 }
 
 .score-display {
-  font-size: 1.4em;
+  font-size: 1.6em; /* Larger score display */
   font-weight: 700;
-  color: var(--primary-dark);
+  color: var(--secondary-color); /* Use teal for final score highlight */
   margin-top: 20px;
+  text-shadow: 0 0 10px rgba(3, 218, 198, 0.8); /* Teal glow for score */
 }
 
 /* --- Responsive Design --- */
 @media (min-width: 768px) {
   .options-grid {
-    grid-template-columns: 1fr 1fr; /* Two columns on larger screens */
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 /* --- Animations --- */
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  50% { transform: scale(1.03); } /* Slightly more pronounced pulse */
   100% { transform: scale(1); }
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-5px); }
-  40%, 80% { transform: translateX(5px); }
+  20%, 60% { transform: translateX(-6px); } /* Stronger shake */
+  40%, 80% { transform: translateX(6px); }
 }
 
+@keyframes subtleGlow {
+  0% { box-shadow: var(--box-shadow-dark), 0 0 15px rgba(187, 134, 252, 0.2); }
+  100% { box-shadow: var(--box-shadow-dark), 0 0 25px rgba(187, 134, 252, 0.4); }
+}
